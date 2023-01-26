@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FurnitureNewComponent } from './furniture-new/furniture-new.component';
+import { FurnitureDetailComponent } from './furniture-detail/furniture-detail.component';
+import { FurnitureEditComponent } from './furniture-edit/furniture-edit.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'furniture/:id/new', component: FurnitureNewComponent },
+  { path: 'furniture/:productId', component: FurnitureDetailComponent },
+  { path: 'furniture/:id/edit', component: FurnitureEditComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class FurnitureRoutingModule { }
+export class FurnitureRoutingModule {}
