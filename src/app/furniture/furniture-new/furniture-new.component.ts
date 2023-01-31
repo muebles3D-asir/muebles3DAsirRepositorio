@@ -7,17 +7,17 @@ import { FurnitureService } from '../../core/furniture.service';
 @Component({
   selector: 'app-furniture-new',
   templateUrl: './furniture-new.component.html',
-  styleUrls: ['./furniture-new.component.css'],
+  styleUrls: ['./furniture-new.component.scss'],
 })
 export class FurnitureNewComponent implements OnInit {
   pageTitle = 'Furniture New';
   errorMessage: string = '';
   furnitureForm: any;
 
-  prodId: number = 0;
+  furnitureId: number = 0;
   furniture: Furniture = {
     id: 0,
-    title: '',
+    name: '',
     price: 0,
     rating: 0,
     shortDescription: '',
@@ -51,15 +51,15 @@ export class FurnitureNewComponent implements OnInit {
       image: '',
     });
 
-    // Read the product Id from the route parameter
-    this.prodId = parseInt(this.activatedroute.snapshot.params['productId']);
+    // Read the furniture Id from the route parameter
+    this.furnitureId = parseInt(this.activatedroute.snapshot.params['furnitureId']);
   }
 
-  saveProduct(): void {
+  saveFurniture(): void {
     if (this.furnitureForm.valid) {
       if (this.furnitureForm.dirty) {
         this.furniture = this.furnitureForm.value;
-        this.furniture.id = this.prodId;
+        this.furniture.id = this.furnitureId;
 
         this.furnitureService.createFurniture(this.furniture).subscribe(
           () => this.onSaveComplete(),

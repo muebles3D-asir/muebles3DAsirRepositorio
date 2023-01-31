@@ -9,7 +9,7 @@ import { Furniture } from 'src/app/shared/furniture.model';
 export class FurnitureItemComponent {
   @Input() furniture: Furniture = {
     id: 0,
-    title: '',
+    name: '',
     price: 0,
     rating: 0,
     shortDescription: '',

@@ -6,7 +6,7 @@ import { HomeComponent } from './home.component';
 import { FurnitureModule } from '../furniture/furniture.module';
 
 @NgModule({
-  declarations: [HomeComponent],
-  imports: [CommonModule, HomeRoutingModule, FurnitureModule],
+    declarations: [HomeComponent],
+    imports: [CommonModule, HomeRoutingModule, FurnitureModule],
 })
 export class HomeModule {}

@@ -26,14 +26,14 @@ import { FurnitureService } from '../../core/furniture.service';
   styleUrls: ['./furniture-edit.component.scss']
 })
 export class FurnitureEditComponent implements OnInit {
-  pageTitle = 'Furniture Edit';
+  pageName = 'Furniture Edit';
   errorMessage: string = '';
   furnitureForm: any;
 
   furnitureId: number = 0;
   furniture: Furniture = {
     id: 0,
-    title: '',
+    name: '',
     price: 0,
     rating: 0,
     shortDescription: '',
@@ -52,7 +52,7 @@ constructor(
 
 ngOnInit(): void {
   this.furnitureForm = this.fb.group({
-    title: [
+    name: [
       '',
       [
         Validators.required,
@@ -85,11 +85,11 @@ displayFurniture(furniture: Furniture): void {
     this.furnitureForm.reset();
   }
   this.furniture = furniture;
-  this.pageTitle = `Edit Product: ${this.furniture.title}`;
+  this.pageName = `Edit Furniture: ${this.furniture.name}`;
 
   // Update the data on the form
   this.furnitureForm.patchValue({
-    title: this.furniture.title,
+    name: this.furniture.name,
     price: this.furniture.price,
     rating: this.furniture.rating,
     description: this.furniture.description,
@@ -99,12 +99,12 @@ displayFurniture(furniture: Furniture): void {
   });
 }
 
-deleteProduct(): void {
+deleteFurniture(): void {
   if (this.furniture.id === 0) {
     // Don't delete, it was never saved.
     this.onSaveComplete();
   } else {
-    if (confirm(`Really delete the product: ${this.furniture.title}?`)) {
+    if (confirm(`Really delete the furniture: ${this.furniture.name}?`)) {
       this.furnitureservice.deleteFurniture(this.furniture.id).subscribe(
         () => this.onSaveComplete(),
         (error: any) => (this.errorMessage = <any>error)

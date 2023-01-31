@@ -1,6 +1,6 @@
 export interface Furniture {
   id: number;
-  title: string;
+  name: string;
   price: number;
   rating: number;
   shortDescription: string;

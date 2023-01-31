@@ -5,15 +5,15 @@
 
     <div class="card-body">
       <form novalidate
-            (ngSubmit)="saveProduct()"
+            (ngSubmit)="saveFurniture()"
             [formGroup]="furnitureForm">
 
         <div class="form-group row mb-2">
           <label  class="col-md-2 col-form-label"
-                 for="productNameId">Product Name</label>
+                 for="furnitureNameId">Furniture Name</label>
           <div class="col-md-8">
             <input class="form-control"
-                   id="productNameId"
+                   id="furnitureNameId"
                    type="text"
                    placeholder="Name (required)"
                    formControlName="title"

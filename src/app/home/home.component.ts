@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FurnitureService } from '../core/furniture.service';
 import { Furniture } from '../shared/furniture.model';
 
@@ -7,7 +7,7 @@ import { Furniture } from '../shared/furniture.model';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   furnitures: Furniture[] = [];
   constructor(private furnitureService: FurnitureService) {}
 

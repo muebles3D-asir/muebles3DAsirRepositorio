@@ -4,25 +4,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
-import { Furniture } from '../shared/furniture.model';
+import { User } from '../shared/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FurnitureService {
-  private furnitureUrl = 'api/furnitures';
+export class UserService {
+  private userUrl = 'api/Users';
 
   constructor(private http: HttpClient) {}
 
-  getFurnitures(): Observable<Furniture[]> {
-    return this.http.get<Furniture[]>(this.furnitureUrl).pipe(
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.userUrl).pipe(
       tap((data) => console.log(JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
-  getMaxFurnitureId(): Observable<number> {
-    return this.http.get<Furniture[]>(this.furnitureUrl).pipe(
+  getMaxUserId(): Observable<number> {
+    return this.http.get<User[]>(this.userUrl).pipe(
       // Get max value from an array
       map((data) =>
         Math.max.apply(
@@ -36,41 +36,41 @@ export class FurnitureService {
     );
   }
 
-  getFurnitureById(id: number): Observable<Furniture> {
-    const url = `${this.furnitureUrl}/${id}`;
-    return this.http.get<Furniture>(url).pipe(
-      tap((data) => console.log('getFurniture: ' + JSON.stringify(data))),
+  getUserById(id: number): Observable<User> {
+    const url = `${this.userUrl}/${id}`;
+    return this.http.get<User>(url).pipe(
+      tap((data) => console.log('getUser: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
-  createFurniture(furniture: Furniture): Observable<Furniture> {
+  createUser(user: User): Observable<User> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    furniture.id = 0;
+    user.id = 0;
     return this.http
-      .post<Furniture>(this.furnitureUrl, furniture, { headers: headers })
+      .post<User>(this.userUrl, user, { headers: headers })
       .pipe(
-        tap((data) => console.log('createFurniture: ' + JSON.stringify(data))),
+        tap((data) => console.log('createUser: ' + JSON.stringify(data))),
         catchError(this.handleError)
       );
   }
 
-  deleteFurniture(id: number): Observable<{}> {
+  deleteUser(id: number): Observable<{}> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const url = `${this.furnitureUrl}/${id}`;
-    return this.http.delete<Furniture>(url, { headers: headers }).pipe(
-      tap((data) => console.log('deleteFurniture: ' + id)),
+    const url = `${this.userUrl}/${id}`;
+    return this.http.delete<User>(url, { headers: headers }).pipe(
+      tap((data) => console.log('deleteUser: ' + id)),
       catchError(this.handleError)
     );
   }
 
-  updateFurniture(furniture: Furniture): Observable<Furniture> {
+  updateUser(user: User): Observable<User> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const url = `${this.furnitureUrl}/${furniture.id}`;
-    return this.http.put<Furniture>(url, furniture, { headers: headers }).pipe(
-      tap(() => console.log('updateFurniture: ' + furniture.id)),
+    const url = `${this.userUrl}/${user.id}`;
+    return this.http.put<User>(url, user, { headers: headers }).pipe(
+      tap(() => console.log('updateUser: ' + user.id)),
       // Return the product on an update
-      map(() => furniture),
+      map(() => user),
       catchError(this.handleError)
     );
   }

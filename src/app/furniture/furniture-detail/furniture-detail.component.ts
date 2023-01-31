@@ -9,9 +9,9 @@ import { FurnitureService } from 'src/app/core/furniture.service';
   styleUrls: ['./furniture-detail.component.scss']
 })
 export class FurnitureDetailComponent implements OnInit {
-  product: Furniture = {
+  furniture: Furniture = {
     id: 0,
-    title: '',
+    name: '',
     price: 0,
     rating: 0,
     shortDescription: '',
@@ -19,7 +19,7 @@ export class FurnitureDetailComponent implements OnInit {
     categories: [''],
     image: '',
   };
-  prodId: number = 0;
+  furnitureId: number = 0;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -28,13 +28,13 @@ export class FurnitureDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.prodId = parseInt(this.activatedroute.snapshot.params['productId']);
+    this.furnitureId = parseInt(this.activatedroute.snapshot.params['furnitureId']);
     this.furnitureService
-      .getFurnitureById(this.prodId)
-      .subscribe((data: Furniture) => (this.product = data));
+      .getFurnitureById(this.furnitureId)
+      .subscribe((data: Furniture) => (this.furniture = data));
   }
   goEdit(): void {
-    this.router.navigate(['/products', this.prodId, 'edit']);
+    this.router.navigate(['/products', this.furnitureId, 'edit']);
   }
   onBack(): void {
     this.router.navigate(['']);

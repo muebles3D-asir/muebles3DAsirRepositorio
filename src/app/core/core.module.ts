@@ -6,8 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FurnitureData } from './furniture-data';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
