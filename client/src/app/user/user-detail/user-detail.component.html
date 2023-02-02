@@ -1,0 +1,25 @@
+<figure class="figure">
+    <img src="https://picsum.photos/820/300" class="figure-img img-fluid rounded">
+    <figcaption class="figure-caption">
+      <h4>Name: {{user.name}}</h4>
+      <h5>password: {{user.password}}</h5>
+      <h5> mail: {{user.mail}}</h5>
+      <h5> rol: {{user.rol}}</h5>
+      <h5>orderTotal: {{user.orderTotal}}</h5>
+    </figcaption>
+  </figure>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <button class="btn btn-outline-secondary mr-3"
+              style="width:80px"
+              (click)="onBack()">
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
+      <button class="btn btn-outline-primary"
+              style="width:80px"
+              (click)="goEdit()">
+        Edit
+      </button>
+    </div>
+  </div>
