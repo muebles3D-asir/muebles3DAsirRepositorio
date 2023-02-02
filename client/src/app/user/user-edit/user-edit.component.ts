@@ -1,20 +1,7 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  OnDestroy,
-  ViewChildren,
-  ElementRef,
-} from '@angular/core';
 
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  FormArray,
-  Validators,
-  FormControlName,
-} from '@angular/forms';
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChildren, ElementRef } from '@angular/core';
+
+import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { User } from '../../shared/user.model';
@@ -23,15 +10,15 @@ import { UserService } from '../../core/user.service';
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.scss']
+  styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit {
-   pageName = 'User Edit';
-   errorMessage: string = '';
-   userForm: any;
+  pageName = 'User Edit';
+  errorMessage: string = '';
+  userForm: any;
 
-   userId: number = 0;
-   user: User = {
+  userId: number = 0;
+  user: User = {
     id: 0,
     name: '',
     password: '',
@@ -43,7 +30,7 @@ export class UserEditComponent implements OnInit {
     private fb: FormBuilder,
     private activatedroute: ActivatedRoute,
     private router: Router,
-    private userservice: Userservice
+    private userservice: UserService
   ) {}
 
   ngOnInit(): void {
@@ -62,12 +49,11 @@ export class UserEditComponent implements OnInit {
       orderTotal: 0,
     });
 
-
     this.userId = parseInt(this.activatedroute.snapshot.params['id']);
     this.getFurniture(this.userId);
   }
 
-  getFurniture(id: number): void {
+  getUser(id: number): void {
     this.userservice.getUserById(id).subscribe(
       (user: User) => this.displayUser(user),
       (error: any) => (this.errorMessage = <any>error)
@@ -93,7 +79,6 @@ export class UserEditComponent implements OnInit {
 
   deleteUser(): void {
     if (this.user.id === 0) {
-
       this.onSaveComplete();
     } else {
       if (confirm(`Really delete the User: ${this.user.name}?`)) {
@@ -128,5 +113,4 @@ export class UserEditComponent implements OnInit {
     this.userForm.reset();
     this.router.navigate(['']);
   }
-  }
-
+}
