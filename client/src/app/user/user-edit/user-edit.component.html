@@ -23,72 +23,58 @@
 
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label"
-                 for="shortdescriptionId">Short description</label>
+                 for="passwordId">password</label>
 
           <div class="col-md-8">
             <textarea class="form-control"
-                      id="shortdescriptionId"
-                      placeholder="Short Description"
+                      id="passwordId"
+                      placeholder="Password"
                       rows=3
-                      formControlName="shortDescription"
-                      name="shortDescription"></textarea>
+                      formControlName="password"
+                      name="password"></textarea>
           </div>
         </div>
 
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label"
-                 for="descriptionId">Description</label>
+                 for="mailId">Mail</label>
 
           <div class="col-md-8">
             <textarea class="form-control"
-                      id="descriptionId"
-                      placeholder="Description"
+                      id="mailId"
+                      placeholder="mail"
                       rows=3
-                      formControlName="description"
-                      name="description"></textarea>
+                      formControlName="mail"
+                      name="mail"></textarea>
           </div>
         </div>
 
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label"
-                 for="userId">Price</label>
+                 for="rolId">Rol</label>
 
           <div class="col-md-8">
             <input class="form-control"
-                      id="priceId"
-                      placeholder="Price"
-                      formControlName="price"
-                      name="price" />
+                      id="rolId"
+                      placeholder="Rol"
+                      formControlName="rol"
+                      name="rol" />
           </div>
         </div>
 
 
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label"
-                 for="categoriesId">Categories</label>
+                 for="orderTotalId">order total</label>
 
           <div class="col-md-8">
             <input class="form-control"
-                      id="categoriesId"
-                      placeholder="Categories"
-                      formControlName="categories"
-                      name="categories" />
+                      id="orderTotalId"
+                      placeholder="OrderTotal"
+                      formControlName="orderTotal"
+                      name="orderTotal" />
           </div>
         </div>
-
-      <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label"
-                 for="imageId">Image</label>
-
-          <div class="col-md-8">
-            <input class="form-control"
-                      id="imageId"
-                      placeholder="Image"
-                      formControlName="image"
-                      name="image" />
-          </div>
-        </div>
-
         <div class="form-group row mb-2">
           <div class="offset-md-2 col-md-4">
             <button class="btn btn-primary mr-3"
@@ -103,8 +89,8 @@
             </button>
             <button class="btn btn-outline-warning"
                     type="button"
-                    title="Delete this furniture"
-                    (click)="deleteFurniture()">
+                    title="Delete this user"
+                    (click)="deleteUser()">
               Delete
             </button>
           </div>

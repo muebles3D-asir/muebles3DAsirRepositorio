@@ -50,7 +50,7 @@ export class UserEditComponent implements OnInit {
     });
 
     this.userId = parseInt(this.activatedroute.snapshot.params['id']);
-    this.getFurniture(this.userId);
+    this.getUser(this.userId);
   }
 
   getUser(id: number): void {

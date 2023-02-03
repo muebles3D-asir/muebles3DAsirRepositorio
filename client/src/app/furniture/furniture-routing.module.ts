@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'furniture/:id/new', component: FurnitureNewComponent },
   { path: 'furniture/:furnitureId', component: FurnitureDetailComponent },
   { path: 'furniture/:id/edit', component: FurnitureEditComponent },
+  
 ];
 
 @NgModule({

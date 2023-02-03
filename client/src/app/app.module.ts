@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FurnitureModule } from './furniture/furniture.module';
 import { SharedModule } from './shared/shared.module';
+import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     HomeModule,
     FurnitureModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -65,7 +65,7 @@ class FurnitureController extends AbstractController {
     return $this->json([$result]);
   }
 
-  #[Route('/furniture-list', name: 'app_furniture_list')]
+  #[Route('/furniture', name: 'app_furniture_list', methods:"get")]
   public function furnitureList(ManagerRegistry $doctrine): JsonResponse {
     $furnitures = $doctrine->getRepository(Furniture::class)->findAll();
     $furnitures_json = [];
