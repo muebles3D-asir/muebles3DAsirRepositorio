@@ -34,7 +34,7 @@ export class FurnitureDetailComponent implements OnInit {
       .subscribe((data: Furniture) => (this.furniture = data));
   }
   goEdit(): void {
-    this.router.navigate(['/products', this.furnitureId, 'edit']);
+    this.router.navigate(['/furnitures', this.furnitureId, 'edit']);
   }
   onBack(): void {
     this.router.navigate(['']);

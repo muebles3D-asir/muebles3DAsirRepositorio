@@ -10,7 +10,7 @@ import { Furniture } from '../shared/furniture.model';
   providedIn: 'root',
 })
 export class FurnitureService {
-  private furnitureUrl = 'http://localhost:8000/furniture';
+  private furnitureUrl = 'http://127.0.0.1:8000/furniture';
 
   constructor(private http: HttpClient) {}
 
