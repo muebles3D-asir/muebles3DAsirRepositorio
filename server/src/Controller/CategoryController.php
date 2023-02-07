@@ -6,26 +6,40 @@ use App\Entity\Category;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController {
+  #[Route('/category/new', name: 'app_category_new', methods: 'post')]
+  public function new(ManagerRegistry $doctrine, Request $request): JsonResponse {
 
-  #[Route('/category', name: 'app_category_new')]
-  public function new(ManagerRegistry $doctrine): JsonResponse {
+    $data = $request->getContent();
+
+    $category_stdClass = json_decode($data);
+
     $em = $doctrine->getManager(); // Entity Manager
 
-    $category = new Category();
-    $category->setName($name);
-    $em->persist($category);
-    $em->flush();
+    foreach ($category_stdClass as $categoryData) {
+      $category = new Category();
+      $category->setName($categoryData->name);    
+     
 
-    return $this->json([
-      'category' => [
-        "id" => $category->getId(),
-        "name" => $category->getName()
-      ]
-    ]);
+      $em->persist($category);
+    }
+
+    $em->flush(); 
+   
+
+    $result = [
+      'name' => $category->getName(),
+      
+     
+    ];
+
+    return $this->json([$result]);
   }
+
+  
 
   #[Route('/category-list', name: 'app_category_list')]
   public function categoryList(ManagerRegistry $doctrine): JsonResponse {
