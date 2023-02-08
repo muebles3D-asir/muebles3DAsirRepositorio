@@ -65,7 +65,7 @@ class FurnitureController extends AbstractController {
     return $this->json([$result]);
   }
 
-  #[Route('/furniture', name: 'app_furniture_list', methods:"get")]
+  #[Route('/furniture', name: 'app_furniture_list', methods:'get')]
   public function furnitureList(ManagerRegistry $doctrine): JsonResponse {
     $furnitures = $doctrine->getRepository(Furniture::class)->findAll();
     $furnitures_json = [];
@@ -91,7 +91,7 @@ class FurnitureController extends AbstractController {
     return $this->json([$furnitures_json]);
   }
 
-  #[Route('/furniture/{id}', name: 'app_furniture_details')]
+  #[Route('/furniture/{id}', name: 'app_furniture_details', methods:'get')]
   public function furnitureDetails(ManagerRegistry $doctrine, $id): JsonResponse {
     // $products = $doctrine->getRepository(Product::class)->find($id);
     $furniture = $doctrine->getRepository(Furniture::class)->findOneBy(["id" => $id]);
@@ -114,7 +114,7 @@ class FurnitureController extends AbstractController {
     return $this->json($furniture_json);
   }
 
-  #[Route('/furniture/{id}/{name}', name: 'app_furniture_edit')]
+  #[Route('/furniture/{id}/{name}', name: 'app_furniture_edit', methods:'put')]
   public function furnitureEdit(ManagerRegistry $doctrine, $id, $name): JsonResponse {
     $em = $doctrine->getManager(); // Entity Manager
     $furniture = $doctrine->getRepository(Furniture::class)->findOneBy(["id" => $id]);

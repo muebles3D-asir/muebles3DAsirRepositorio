@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FurnitureService } from './furniture.service';
 import { HttpClientModule } from '@angular/common/http';
 
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FurnitureData } from './furniture-data';
 
 @NgModule({
@@ -11,7 +11,7 @@ import { FurnitureData } from './furniture-data';
   imports: [
     CommonModule,
     HttpClientModule,
-    InMemoryWebApiModule.forRoot(FurnitureData),
+    // InMemoryWebApiModule.forRoot(FurnitureData),
   ],
   providers: [FurnitureService],
 })

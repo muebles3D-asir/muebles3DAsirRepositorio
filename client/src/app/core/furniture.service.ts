@@ -10,19 +10,20 @@ import { Furniture } from '../shared/furniture.model';
   providedIn: 'root',
 })
 export class FurnitureService {
-  private furnitureUrl = 'http://127.0.0.1:8000/furniture';
+  private url = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient) {}
 
   getFurnitures(): Observable<Furniture[]> {
-    return this.http.get<Furniture[]>(this.furnitureUrl).pipe(
+    const furnitureUrl = `${this.url}/furniture`;
+    return this.http.get<any[]>(furnitureUrl).pipe(
       tap((data) => console.log(JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
   getMaxFurnitureId(): Observable<number> {
-    return this.http.get<Furniture[]>(this.furnitureUrl).pipe(
+    return this.http.get<Furniture[]>(this.url).pipe(
       // Get max value from an array
       map((data) =>
         Math.max.apply(
@@ -37,7 +38,7 @@ export class FurnitureService {
   }
 
   getFurnitureById(id: number): Observable<Furniture> {
-    const url = `${this.furnitureUrl}/${id}`;
+    const url = `${this.url}/${id}`;
     return this.http.get<Furniture>(url).pipe(
       tap((data) => console.log('getFurniture: ' + JSON.stringify(data))),
       catchError(this.handleError)
@@ -48,7 +49,7 @@ export class FurnitureService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     furniture.id = 0;
     return this.http
-      .post<Furniture>(this.furnitureUrl, furniture, { headers: headers })
+      .post<Furniture>(this.url, furniture, { headers: headers })
       .pipe(
         tap((data) => console.log('createFurniture: ' + JSON.stringify(data))),
         catchError(this.handleError)
@@ -57,7 +58,7 @@ export class FurnitureService {
 
   deleteFurniture(id: number): Observable<{}> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const url = `${this.furnitureUrl}/${id}`;
+    const url = `${this.url}/${id}`;
     return this.http.delete<Furniture>(url, { headers: headers }).pipe(
       tap((data) => console.log('deleteFurniture: ' + id)),
       catchError(this.handleError)
@@ -66,7 +67,7 @@ export class FurnitureService {
 
   updateFurniture(furniture: Furniture): Observable<Furniture> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const url = `${this.furnitureUrl}/${furniture.id}`;
+    const url = `${this.url}/${furniture.id}`;
     return this.http.put<Furniture>(url, furniture, { headers: headers }).pipe(
       tap(() => console.log('updateFurniture: ' + furniture.id)),
       // Return the product on an update
