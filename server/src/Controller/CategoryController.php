@@ -10,81 +10,74 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController {
-  #[Route('/category/new', name: 'app_category_new', methods: 'post')]
+  #[Route('/category', name: 'app_category_new', methods: 'post')]
   public function new(ManagerRegistry $doctrine, Request $request): JsonResponse {
+    $em = $doctrine->getManager();
 
     $data = $request->getContent();
-
     $category_stdClass = json_decode($data);
 
-    $em = $doctrine->getManager(); // Entity Manager
+    $category = new Category();
+    $category->setName($category_stdClass->name);
 
-    foreach ($category_stdClass as $categoryData) {
-      $category = new Category();
-      $category->setName($categoryData->name);    
-     
-
-      $em->persist($category);
-    }
-
-    $em->flush(); 
-   
+    $em->persist($category);
+    $em->flush();
 
     $result = [
-      'name' => $category->getName(),
-      
-     
+      'name' => $category->getName()
     ];
 
     return $this->json([$result]);
   }
 
-  
-
-  #[Route('/category-list', name: 'app_category_list')]
+  #[Route('/category', name: 'app_category_list', methods: 'get')]
   public function categoryList(ManagerRegistry $doctrine): JsonResponse {
     $categories = $doctrine->getRepository(Category::class)->findAll();
     $categories_json = [];
-    $tmp = [];
 
     foreach ($categories as $category) {
-      $tmp[] = [
-        "id" => $category->getId(),
-        "name" => $category->getName()
+      $categories_json[] = [
+        'name' => $category->getName()
       ];
     }
 
-    $categories_json[] = $tmp;
-    return $this->json(["categories" => $categories_json]);
+    return $this->json([$categories_json]);
   }
 
-  #[Route('/category/{id}', name: 'app_category_details')]
+  #[Route('/category/{id}', name: 'app_category_details', methods: 'get')]
   public function categoryDetails(ManagerRegistry $doctrine, $id): JsonResponse {
     $category = $doctrine->getRepository(Category::class)->findOneBy(["id" => $id]);
     $category_json = [
-      "id" => $category->getId(),
-      "name" => $category->getName()
+      'name' => $category->getName()
     ];
 
     return $this->json($category_json);
   }
 
-  #[Route('/category/edit/{id}/{name}', name: 'app_category_edit')]
-  public function categoryEdit(ManagerRegistry $doctrine, $id, $name) {
-    $em = $doctrine->getManager(); // Entity Manager
+  #[Route('/category/{id}', name: 'app_category_delete', methods: 'delete')]
+  public function categoryDelete(ManagerRegistry $doctrine, $id): JsonResponse {
     $category = $doctrine->getRepository(Category::class)->findOneBy(["id" => $id]);
-    $category->setName($name);
-    $em->persist($category);
-    $em->flush();
-  }
-
-  #[Route('/category/delete/{id}', name: 'app_category_edit')]
-  public function categoryDelete(ManagerRegistry $doctrine, $id, $name) {
-    $em = $doctrine->getManager(); // Entity Manager
-    $category = $doctrine->getRepository(Category::class)->findOneBy(["id" => $id]);
-    $category->setName($name);
-
+    $em = $doctrine->getManager();
     $em->remove($category);
     $em->flush();
+    return $this->json(["Mensaje" => "Eliminado correctamente"]);
+  }
+
+  #[Route('/category/{id}', name: 'app_category_edit', methods: 'put')]
+  public function categoryEdit(ManagerRegistry $doctrine, $id, Request $request): JsonResponse {
+    $em = $doctrine->getManager();
+    $category = $doctrine->getRepository(Category::class)->findOneBy(["id" => $id]);
+    $data = $request->getContent();
+    $category_stdClass = json_decode($data);
+
+    $category->setName($category_stdClass->name);
+
+    $em->persist($category);
+    $em->flush();
+
+    $category_json = [
+      'name' => $category->getName()
+    ];
+    return $this->json([$category_json]);
   }
 }
