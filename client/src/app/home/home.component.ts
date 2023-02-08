@@ -12,8 +12,20 @@ export class HomeComponent implements OnInit {
   constructor(private furnitureService: FurnitureService) {}
 
   ngOnInit() {
+    // this.furnitureService
+    //   .getFurnitures()
+    //   .subscribe((data: Furniture[]) => (this.furnitures = data));
     this.furnitureService
-      .getFurnitures()
-      .subscribe((data: Furniture[]) => (this.furnitures = data));
+      .createFurniture({
+        id: 10,
+        name: 'Prueba',
+        price: 100,
+        rating: 5,
+        shortDescription: 'jeje',
+        description: 'jejejeje',
+        categories: ['Categoria 1', 'Categoria 2'],
+        image: '',
+      })
+      .subscribe(() => console.log("Creado"));
   }
 }

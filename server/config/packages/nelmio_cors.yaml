@@ -1,11 +1,7 @@
 nelmio_cors:
     defaults:
         origin_regex: true
-<<<<<<< HEAD
         allow_origin: ['%env(CORS_ALLOW_ORIGIN)%']
-=======
-        allow_origin: ['http://127.0.0.1:4200']
->>>>>>> 3ffe8552bf0d714d77a983c766d7097c95f13d72
         allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
         allow_headers: ['Content-Type', 'Authorization']
         expose_headers: ['Link']

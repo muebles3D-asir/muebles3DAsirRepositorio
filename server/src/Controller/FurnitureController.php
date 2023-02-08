@@ -12,34 +12,30 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FurnitureController extends AbstractController {
 
-  #[Route('/furniture/new', name: 'app_furniture_new', methods: 'post')]
+  #[Route('/furniture', name: 'app_furniture_new', methods: 'post')]
   public function new(ManagerRegistry $doctrine, Request $request): JsonResponse {
-
-    $data = $request->getContent();
-
-    $furniture_stdClass = json_decode($data);
-
     $em = $doctrine->getManager(); // Entity Manager
 
-    foreach ($furniture_stdClass as $furnitureData) {
-      $furniture = new Furniture();
-      $furniture->setName($furnitureData->name);
-      $price = floatval($furnitureData->price);
-      $furniture->setPrice($price);
-      $furniture->setRating($furnitureData->rating);
-      $furniture->setShortDescription($furnitureData->shortDescription);
-      $furniture->setDescription($furnitureData->description);
-      $furniture->setImage($furnitureData->image);
+    $data = $request->getContent();
+    $furniture_stdClass = json_decode($data);
 
-      foreach ($furnitureData->categories as $category_stdClass) {
-        $category = new Category();
-        $category->setName($category_stdClass->name);
-        $em->persist($category);
-        $furniture->addCategory($category);
-      }
+    $furniture = new Furniture();
+    $furniture->setName($furniture_stdClass->name);
+    $price = floatval($furniture_stdClass->price);
+    $furniture->setPrice($price);
+    $furniture->setRating($furniture_stdClass->rating);
+    $furniture->setShortDescription($furniture_stdClass->shortDescription);
+    $furniture->setDescription($furniture_stdClass->description);
+    $furniture->setImage($furniture_stdClass->image);
 
-      $em->persist($furniture);
+    foreach ($furniture_stdClass->categories as $category_stdClass) {
+      $category = new Category();
+      $category->setName($category_stdClass->name);
+      $em->persist($category);
+      $furniture->addCategory($category);
     }
+
+    $em->persist($furniture);
 
     $em->flush();
 
@@ -101,6 +97,7 @@ class FurnitureController extends AbstractController {
         'name' => $categoryD->getName()
       ];
     }
+
     $furniture_json = [
       'name' => $furniture->getName(),
       'price' => $furniture->getPrice(),
@@ -114,15 +111,41 @@ class FurnitureController extends AbstractController {
     return $this->json($furniture_json);
   }
 
-  #[Route('/furniture/{id}/{name}', name: 'app_furniture_edit', methods:'put')]
-  public function furnitureEdit(ManagerRegistry $doctrine, $id, $name): JsonResponse {
+  #[Route('/furniture/{id}', name: 'app_furniture_delete', methods: 'delete')]
+  public function furnitureDelete(ManagerRegistry $doctrine, $id): JsonResponse {
+    // $products = $doctrine->getRepository(Product::class)->find($id);
+    $furniture = $doctrine->getRepository(Furniture::class)->findOneBy(["id" => $id]);
+    $em = $doctrine->getManager(); // Entity Manager
+    $em->remove($furniture);
+    $em->flush();
+    return $this->json(["Mensaje"=>"Eliminado correctamente"]);
+  }
+
+  #[Route('/furniture/{id}', name: 'app_furniture_edit', methods:'put')]
+  public function furnitureEdit(ManagerRegistry $doctrine, $id, Request $request): JsonResponse {
     $em = $doctrine->getManager(); // Entity Manager
     $furniture = $doctrine->getRepository(Furniture::class)->findOneBy(["id" => $id]);
-    $furniture->setName($name);
+    $data = $request->getContent();
+    $furniture_stdClass = json_decode($data);
+
+    $furniture->setName($furniture_stdClass->name);
+    $price = floatval($furniture_stdClass->price);
+    $furniture->setPrice($price);
+    $furniture->setRating($furniture_stdClass->rating);
+    $furniture->setShortDescription($furniture_stdClass->shortDescription);
+    $furniture->setDescription($furniture_stdClass->description);
+    $furniture->setImage($furniture_stdClass->image);
+
+    foreach ($furniture_stdClass->categories as $category_stdClass) {
+      $category = new Category();
+      $category->setName($category_stdClass->name);
+      $em->persist($category);
+      $furniture->addCategory($category);
+    }
+
     $em->persist($furniture);
     $em->flush();
 
-    $furniture = $doctrine->getRepository(Furniture::class)->findOneBy(["id" => $id]);
     $categories = [];
     foreach ($furniture->getCategories() as $categoryD) {
       $categories[] = [

@@ -10,12 +10,12 @@ import { Furniture } from '../shared/furniture.model';
   providedIn: 'root',
 })
 export class FurnitureService {
-  private url = 'http://127.0.0.1:8000';
+  private url = 'http://127.0.0.1:8000/furniture';
 
   constructor(private http: HttpClient) {}
 
   getFurnitures(): Observable<Furniture[]> {
-    const furnitureUrl = `${this.url}/furniture`;
+    const furnitureUrl = this.url;
     return this.http.get<any[]>(furnitureUrl).pipe(
       tap((data) => console.log(JSON.stringify(data))),
       catchError(this.handleError)
@@ -23,7 +23,7 @@ export class FurnitureService {
   }
 
   getMaxFurnitureId(): Observable<number> {
-    return this.http.get<Furniture[]>(this.url).pipe(
+    return this.http.get<Furniture[]>(`${this.url}`).pipe(
       // Get max value from an array
       map((data) =>
         Math.max.apply(
