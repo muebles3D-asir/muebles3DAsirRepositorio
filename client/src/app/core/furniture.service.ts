@@ -15,7 +15,7 @@ export class FurnitureService {
   constructor(private http: HttpClient) {}
 
   getFurnitures(): Observable<Furniture[]> {
-    
+
     return this.http.get<Furniture[]>(this.url).pipe(
       tap((data) => console.log(JSON.stringify(data))),
       catchError(this.handleError)

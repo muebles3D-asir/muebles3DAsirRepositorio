@@ -58,19 +58,15 @@ export class FurnitureNewComponent implements OnInit {
 
   saveFurniture(): void {
     if (this.furnitureForm.valid) {
-      if (this.furnitureForm.dirty) {       
+      if (this.furnitureForm.dirty) {
        let tmp = this.furnitureForm.value;
+       this.furniture.name = tmp.name;
        this.furniture.price = +tmp.price;
        this.furniture.rating = +tmp.rating;
-      let tmp2: any[] = [];
-      tmp.categories.split(',').forEach( (cat: any)=> {
-        tmp2.push({"name": cat})
-      });
-       this.furniture.categories = tmp2;
-       this.furniture.description = tmp.description;
-       this.furniture.name = tmp.name;
-       this.furniture.image = tmp.image;
        this.furniture.shortDescription = tmp.shortDescription;
+       this.furniture.description = tmp.description;
+       this.furniture.categories = tmp.categories.split(',');
+       this.furniture.image = tmp.image;
 
         console.log(this.furniture);
         this.furniture.id = this.furnitureId;
