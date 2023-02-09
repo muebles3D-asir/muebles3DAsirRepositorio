@@ -1,0 +1,104 @@
+<div class="card">
+    <div class="card-header">
+      {{pageName}}
+    </div>
+
+    <div class="card-body">
+      <form novalidate
+            (ngSubmit)="saveUser()"
+            [formGroup]="userForm">
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="userNameId">User Name</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="userNameId"
+                   type="text"
+                   placeholder="Name (required)"
+                   formControlName="title"
+                   name="title" />
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="passwordId">password</label>
+
+          <div class="col-md-8">
+            <textarea class="form-control"
+                      id="passwordId"
+                      placeholder="Password"
+                      rows=3
+                      formControlName="password"
+                      name="password"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="mailId">Mail</label>
+
+          <div class="col-md-8">
+            <textarea class="form-control"
+                      id="mailId"
+                      placeholder="mail"
+                      rows=3
+                      formControlName="mail"
+                      name="mail"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="rolId">Rol</label>
+
+          <div class="col-md-8">
+            <input class="form-control"
+                      id="rolId"
+                      placeholder="Rol"
+                      formControlName="rol"
+                      name="rol" />
+          </div>
+        </div>
+
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="orderTotalId">order total</label>
+
+          <div class="col-md-8">
+            <input class="form-control"
+                      id="orderTotalId"
+                      placeholder="OrderTotal"
+                      formControlName="orderTotal"
+                      name="orderTotal" />
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <div class="offset-md-2 col-md-4">
+            <button class="btn btn-primary mr-3"
+                    type="submit">
+              Save
+            </button>
+            <button class="btn btn-outline-secondary mr-3"
+                    type="button"
+                    title="Cancel your edits"
+                    [routerLink]="['']">
+              Cancel
+            </button>
+            <button class="btn btn-outline-warning"
+                    type="button"
+                    title="Delete this user"
+                    (click)="deleteUser()">
+              Delete
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="alert alert-danger"
+         *ngIf="errorMessage">{{errorMessage}}
+    </div>
+  </div>
