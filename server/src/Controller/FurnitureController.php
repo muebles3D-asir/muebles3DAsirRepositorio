@@ -18,11 +18,11 @@ class FurnitureController extends AbstractController {
 
     $data = $request->getContent();
     $furniture_stdClass = json_decode($data);
+    
 
     $furniture = new Furniture();
-    $furniture->setName($furniture_stdClass->name);
-    $price = floatval($furniture_stdClass->price);
-    $furniture->setPrice($price);
+    $furniture->setName($furniture_stdClass->name);   
+    $furniture->setPrice($furniture_stdClass->price);
     $furniture->setRating($furniture_stdClass->rating);
     $furniture->setShortDescription($furniture_stdClass->shortDescription);
     $furniture->setDescription($furniture_stdClass->description);
@@ -65,15 +65,15 @@ class FurnitureController extends AbstractController {
   public function furnitureList(ManagerRegistry $doctrine): JsonResponse {
     $furnitures = $doctrine->getRepository(Furniture::class)->findAll();
     $furnitures_json = [];
-
+    $categories = [];
+    
     foreach ($furnitures as $furniture) {
       foreach ($furniture->getCategories() as $categoryD) {
-        $categories[] = [
-          'name' => $categoryD->getName()
-        ];
+        $categories[] =$categoryD->getName();
       }
 
       $furnitures_json[] = [
+        'id' => $furniture->getId(),
         'name' => $furniture->getName(),
         'price' => $furniture->getPrice(),
         'rating' => $furniture->getRating(),
@@ -84,7 +84,7 @@ class FurnitureController extends AbstractController {
       ];
     }
 
-    return $this->json([$furnitures_json]);
+    return $this->json($furnitures_json);
   }
 
   #[Route('/furniture/{id}', name: 'app_furniture_details', methods:'get')]
@@ -93,9 +93,8 @@ class FurnitureController extends AbstractController {
     $furniture = $doctrine->getRepository(Furniture::class)->findOneBy(["id" => $id]);
     $categories = [];
     foreach ($furniture->getCategories() as $categoryD) {
-      $categories[] = [
-        'name' => $categoryD->getName()
-      ];
+      $categories[] =$categoryD->getName();
+
     }
 
     $furniture_json = [
@@ -161,6 +160,6 @@ class FurnitureController extends AbstractController {
       'image' => $furniture->getImage(),
       'categories' => $categories
     ];
-    return $this->json([$furniture_json]);
+    return $this->json($furniture_json);
   }
 }

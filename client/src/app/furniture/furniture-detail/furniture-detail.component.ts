@@ -20,6 +20,8 @@ export class FurnitureDetailComponent implements OnInit {
     image: '',
   };
   furnitureId: number = 0;
+  categoriesList: string = this.furniture.categories.join(", ");
+  
 
   constructor(
     private activatedroute: ActivatedRoute,

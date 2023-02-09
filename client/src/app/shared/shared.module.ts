@@ -18,6 +18,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     RouterModule
   ],
   exports: [
+    FooterComponent,
+    NavbarComponent,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,

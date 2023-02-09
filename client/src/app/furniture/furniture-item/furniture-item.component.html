@@ -1,7 +1,8 @@
 <figure class="figure">
-  <img src="{{furniture.image}}" class="figure-img img-fluid rounded">
+  <img src="{{furniture.image}}" class="figure-img img-fluid rounded"/>
   <figcaption class="figure-caption">
-    <h5><a [routerLink]="['/furniture', furniture.id]">{{furniture.name}}</a>
+    <h5>
+      <a [routerLink]="['/furniture', furniture.id]">{{furniture.name}}</a>
       <span>{{furniture.price }}</span>
     </h5>
     <p>{{furniture.shortDescription}}</p>

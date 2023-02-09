@@ -10,13 +10,13 @@ import { Furniture } from '../shared/furniture.model';
   providedIn: 'root',
 })
 export class FurnitureService {
-  private url = 'http://127.0.0.1:8000/furniture';
+  private url = 'http://localhost:8000/furniture';
 
   constructor(private http: HttpClient) {}
 
   getFurnitures(): Observable<Furniture[]> {
-    const furnitureUrl = this.url;
-    return this.http.get<any[]>(furnitureUrl).pipe(
+    
+    return this.http.get<Furniture[]>(this.url).pipe(
       tap((data) => console.log(JSON.stringify(data))),
       catchError(this.handleError)
     );

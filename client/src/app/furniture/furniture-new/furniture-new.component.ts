@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Furniture } from '../../shared/furniture.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FurnitureService } from '../../core/furniture.service';
+import { Category } from 'src/app/shared/category.model';
 
 @Component({
   selector: 'app-furniture-new',
@@ -35,7 +36,7 @@ export class FurnitureNewComponent implements OnInit {
 
   ngOnInit(): void {
     this.furnitureForm = this.fb.group({
-      title: [
+      name: [
         '',
         [
           Validators.required,
@@ -43,9 +44,9 @@ export class FurnitureNewComponent implements OnInit {
           Validators.maxLength(50),
         ],
       ],
-      categories: '',
-      rating: '',
-      price: '',
+      categories:[''],
+      rating: 0,
+      price: 0.0,
       description: '',
       shortDescription: '',
       image: '',
@@ -57,8 +58,21 @@ export class FurnitureNewComponent implements OnInit {
 
   saveFurniture(): void {
     if (this.furnitureForm.valid) {
-      if (this.furnitureForm.dirty) {
-        this.furniture = this.furnitureForm.value;
+      if (this.furnitureForm.dirty) {       
+       let tmp = this.furnitureForm.value;
+       this.furniture.price = +tmp.price;
+       this.furniture.rating = +tmp.rating;
+      let tmp2: any[] = [];
+      tmp.categories.split(',').forEach( (cat: any)=> {
+        tmp2.push({"name": cat})
+      });
+       this.furniture.categories = tmp2;
+       this.furniture.description = tmp.description;
+       this.furniture.name = tmp.name;
+       this.furniture.image = tmp.image;
+       this.furniture.shortDescription = tmp.shortDescription;
+
+        console.log(this.furniture);
         this.furniture.id = this.furnitureId;
 
         this.furnitureService.createFurniture(this.furniture).subscribe(

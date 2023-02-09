@@ -6,5 +6,5 @@ export interface Furniture {
   shortDescription: string;
   description: string;
   categories: string[];
-  image: '';
+  image: string;
 }
