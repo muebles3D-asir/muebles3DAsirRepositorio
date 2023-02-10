@@ -4,92 +4,65 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements PasswordAuthenticatedUserInterface
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+  
+     #[ORM\Column(type="integer")]
+     #[ORM\Id]
+     #[ORM\GeneratedValue(strategy="AUTO")]     
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    /**
+     * @ORM\Column(type="string", length=25, unique=true)
+     */
+    private $username;
 
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
+    /**
+     * @ORM\Column(type="string", length=500)
+     */
+    private $password;
 
-    #[ORM\Column(length: 255)]
-    private ?string $mail = null;
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
 
-    #[ORM\Column(length: 255)]
-    private ?string $rol = null;
-
-    #[ORM\Column]
-    private ?int $orderTotal = null;
-
-    public function getId(): ?int
+    public function __construct($username)
     {
-        return $this->id;
+        $this->isActive = true;
+        $this->username = $username;
     }
 
-    public function getName(): ?string
+    public function getUsername()
     {
-        return $this->name;
+        return $this->username;
     }
 
-    public function setName(string $name): self
+    public function getSalt()
     {
-        $this->name = $name;
-
-        return $this;
+        return null;
     }
 
-    public function getPassword(): ?string
+    public function getPassword()
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
     }
 
-    public function getMail(): ?string
+    public function getRoles()
     {
-        return $this->mail;
+        return array('ROLE_USER');
     }
 
-    public function setMail(string $mail): self
+    public function eraseCredentials()
     {
-        $this->mail = $mail;
-
-        return $this;
-    }
-
-    public function getRol(): ?string
-    {
-        return $this->rol;
-    }
-
-    public function setRol(string $rol): self
-    {
-        $this->rol = $rol;
-
-        return $this;
-    }
-
-    public function getOrderTotal(): ?int
-    {
-        return $this->orderTotal;
-    }
-
-    public function setOrderTotal(int $orderTotal): self
-    {
-        $this->orderTotal = $orderTotal;
-
-        return $this;
     }
 }

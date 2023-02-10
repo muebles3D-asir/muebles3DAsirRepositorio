@@ -36,7 +36,7 @@ class FurnitureController extends AbstractController {
          'name' => $furniture->getName(),
          'price' => $furniture->getPrice(),
          'rating' => $furniture->getRating(),
-         'short description' => $furniture->getShortDescription(),
+         'shortDescription' => $furniture->getShortDescription(),
          'description' => $furniture->getDescription(),
          'image' => $furniture->getImage(),
          'categories' => $furniture->getCategories()
@@ -56,7 +56,7 @@ class FurnitureController extends AbstractController {
             'name' => $furniture->getName(),
             'price' => $furniture->getPrice(),
             'rating' => $furniture->getRating(),
-            'short description' => $furniture->getShortDescription(),
+            'shortDescription' => $furniture->getShortDescription(),
             'description' => $furniture->getDescription(),
             'image' => $furniture->getImage(),
             'categories' => $furniture->getCategories()
@@ -75,7 +75,7 @@ class FurnitureController extends AbstractController {
          'name' => $furniture->getName(),
          'price' => $furniture->getPrice(),
          'rating' => $furniture->getRating(),
-         'short description' => $furniture->getShortDescription(),
+         'shortDescription' => $furniture->getShortDescription(),
          'description' => $furniture->getDescription(),
          'image' => $furniture->getImage(),
          'categories' => $furniture->getCategories()
@@ -117,7 +117,7 @@ class FurnitureController extends AbstractController {
          'name' => $furniture->getName(),
          'price' => $furniture->getPrice(),
          'rating' => $furniture->getRating(),
-         'short description' => $furniture->getShortDescription(),
+         'shortDescription' => $furniture->getShortDescription(),
          'description' => $furniture->getDescription(),
          'image' => $furniture->getImage(),
          'categories' => $furniture->getCategories()

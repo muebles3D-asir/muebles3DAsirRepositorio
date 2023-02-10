@@ -40,7 +40,7 @@ export class FurnitureService {
   getFurnitureById(id: number): Observable<Furniture> {
     const url = `${this.url}/${id}`;
     return this.http.get<Furniture>(url).pipe(
-      tap((data) => console.log('getFurniture: ' + JSON.stringify(data))),
+      tap((data) => console.log('getFurnitureById: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }

@@ -20,7 +20,7 @@ export class FurnitureDetailComponent implements OnInit {
     image: '',
   };
   furnitureId: number = 0;
-  categoriesList: string = this.furniture.categories.join(", ");
+  categoriesList: string = "";
   
 
   constructor(
@@ -33,10 +33,13 @@ export class FurnitureDetailComponent implements OnInit {
     this.furnitureId = parseInt(this.activatedroute.snapshot.params['furnitureId']);
     this.furnitureService
       .getFurnitureById(this.furnitureId)
-      .subscribe((data: Furniture) => (this.furniture = data));
+      .subscribe((data: Furniture) => {
+        this.furniture = data;
+        this.categoriesList = this.furniture.categories.toString();
+      });
   }
   goEdit(): void {
-    this.router.navigate(['/furnitures', this.furnitureId, 'edit']);
+    this.router.navigate(['/furniture', this.furnitureId, 'edit']);
   }
   onBack(): void {
     this.router.navigate(['']);

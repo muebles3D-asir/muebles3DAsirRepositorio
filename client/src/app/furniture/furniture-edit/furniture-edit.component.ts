@@ -26,8 +26,6 @@ export class FurnitureEditComponent implements OnInit {
     description: '',
     categories: [''],
     image: '',
-
-
 };
 constructor(
   private fb: FormBuilder,
@@ -46,14 +44,13 @@ ngOnInit(): void {
         Validators.maxLength(50),
       ],
     ],
-    categories: '',
+    categories: [''],
     rating: 0,
     price: 0.0,
     description: '',
     shortDescription: '',
     image: '',
   });
-
 
   this.furnitureId = parseInt(this.activatedroute.snapshot.params['id']);
   this.getFurniture(this.furnitureId);
@@ -80,7 +77,7 @@ displayFurniture(furniture: Furniture): void {
     rating: this.furniture.rating,
     description: this.furniture.description,
     shortDescription: this.furniture.shortDescription,
-    categories: this.furniture.categories,
+    categories: this.furniture.categories.join(','),
     image: this.furniture.image,
   });
 }
@@ -97,13 +94,19 @@ deleteFurniture(): void {
       );
     }
   }
-}
-
+  }
+  
 saveFurniture(): void {
   if (this.furnitureForm.valid) {
     if (this.furnitureForm.dirty) {
-      this.furniture = this.furnitureForm.value;
-      this.furniture.id = this.furnitureId;
+     let tmp = this.furnitureForm.value;
+       this.furniture.name = tmp.name;
+       this.furniture.price = +tmp.price;
+       this.furniture.rating = +tmp.rating;
+       this.furniture.shortDescription = tmp.shortDescription;
+       this.furniture.description = tmp.description;
+       this.furniture.categories = tmp.categories.split(',');
+       this.furniture.image = tmp.image;
 
       this.furnitureservice.updateFurniture(this.furniture).subscribe(
         () => this.onSaveComplete(),
