@@ -7,28 +7,25 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements PasswordAuthenticatedUserInterface
 {
   
-     #[ORM\Column(type="integer")]
-     #[ORM\Id]
-     #[ORM\GeneratedValue(strategy="AUTO")]     
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=25, unique=true)
-     */
+    #[ORM\Column(length: 25)]
     private $username;
 
-    /**
-     * @ORM\Column(type="string", length=500)
-     */
-    private $password;
+    
+    #[ORM\Column(length:500)]     
+    private  $password;
 
-    /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
+    
+    #[ORM\Column(name:"is_active", type:"boolean")]     
     private $isActive;
 
     public function __construct($username)
@@ -46,16 +43,18 @@ class User implements PasswordAuthenticatedUserInterface
     {
         return null;
     }
-
-    public function getPassword()
-    {
+    public function getPassword(): ?string{
+       
         return $this->password;
+
     }
+    
 
     public function setPassword($password)
     {
         $this->password = $password;
     }
+   
 
     public function getRoles()
     {
@@ -65,4 +64,6 @@ class User implements PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
     }
+    
 }
+
