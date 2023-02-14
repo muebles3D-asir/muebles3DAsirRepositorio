@@ -44,3 +44,9 @@ when@test:
                         class: App\Entity\UserMgr\User
               
                     property: username
+        firewalls:        
+            api:
+                pattern:   ^/api
+                stateless: true
+                jwt:
+                    authenticator: app.custom_authenticator
