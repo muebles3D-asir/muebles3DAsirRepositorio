@@ -50,3 +50,4 @@ when@test:
                 stateless: true
                 jwt:
                     authenticator: app.custom_authenticator
+                    

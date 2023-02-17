@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\UserMgr\User;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +14,7 @@ class SecurityController extends AbstractController
 {
     #[Route('/register', name: 'register', methods: 'post')]   
      
-    public function register(ManagerRegistry $doctrine, Request $request, UserPasswordEncoderInterface $encoder)
+    public function register(ManagerRegistry $doctrine, Request $request, App\Controller\UserPasswordEncoderInterface $encoder)
     {
         $em = $this->$doctrine->getManager();
         // IMP! To get JSON format from POST method
