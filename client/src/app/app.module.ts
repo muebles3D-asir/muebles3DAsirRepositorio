@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 import { FurnitureModule } from './furniture/furniture.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from "@angular/common/http";
-
+import { LogComponent } from './log/log.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+   // LogComponent // TODO: Ver porque no va
   ],
   imports: [
     BrowserModule,
