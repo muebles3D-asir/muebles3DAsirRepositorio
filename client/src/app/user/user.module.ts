@@ -6,13 +6,15 @@ import { UserItemComponent } from './user-item/user-item.component';
 import { UserNewComponent } from './user-new/user-new.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserLogComponent } from './user-log/user-log.component';
 
 @NgModule({
   declarations: [
     UserDetailComponent,
     UserEditComponent,
     UserItemComponent,
-    UserNewComponent
+    UserNewComponent,
+    UserLogComponent
   ],
   imports: [
     CommonModule,
