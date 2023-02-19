@@ -18,6 +18,10 @@ export class FurnitureDetailComponent implements OnInit {
     description: '',
     categories: [''],
     image: '',
+    filamento: '',
+    color: '',
+    material: '',
+    tamaño: 0
   };
   furnitureId: number = 0;
   categoriesList: string = "";

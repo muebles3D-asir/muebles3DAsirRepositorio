@@ -35,6 +35,68 @@ class Furniture
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $filamento = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $color = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $material = null;
+
+    #[ORM\Column]
+    private ?float $tamaño = null;
+
+    public function gettamaño(): ?string
+    {
+        return $this->tamaño;
+    }
+
+    public function settamaño(string $tamaño): self
+    {
+        $this->tamaño = $tamaño;
+
+        return $this;
+    }
+
+    public function getmaterial(): ?string
+    {
+        return $this->material;
+    }
+
+    public function setmaterial(string $material): self
+    {
+        $this->material = $material;
+
+        return $this;
+    }
+
+    public function getcolor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setcolor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getfilamento(): ?string
+    {
+        return $this->filamento;
+    }
+
+    public function setfilamento(string $filamento): self
+    {
+        $this->filamento = $filamento;
+
+        return $this;
+    }
+
+
+
     public function getId(): ?int
     {
         return $this->id;

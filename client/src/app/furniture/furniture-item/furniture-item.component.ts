@@ -15,6 +15,10 @@ export class FurnitureItemComponent {
     shortDescription: '',
     description: '',
     categories: [''],
-    image: '',
+    image: '',    
+    filamento: '',
+    color: '',
+    material: '',
+    tamaño: 0    
   };
 }

@@ -39,7 +39,11 @@ class FurnitureController extends AbstractController {
          'shortDescription' => $furniture->getShortDescription(),
          'description' => $furniture->getDescription(),
          'image' => $furniture->getImage(),
-         'categories' => $furniture->getCategories()
+         'categories' => $furniture->getCategories(),
+         'filamento' => $furniture->getfilamento(),
+         'color' => $furniture->getcolor(),
+         'material' => $furniture->getmaterial(),
+         'tamaño' => $furniture->gettamaño()
       ];
 
       return $this->json($result);
@@ -59,7 +63,11 @@ class FurnitureController extends AbstractController {
             'shortDescription' => $furniture->getShortDescription(),
             'description' => $furniture->getDescription(),
             'image' => $furniture->getImage(),
-            'categories' => $furniture->getCategories()
+            'categories' => $furniture->getCategories(),
+            'filamento' => $furniture->getfilamento(),
+            'color' => $furniture->getcolor(),
+            'material' => $furniture->getmaterial(),
+            'tamaño' => $furniture->gettamaño()
          ];
       }
 
@@ -78,7 +86,11 @@ class FurnitureController extends AbstractController {
          'shortDescription' => $furniture->getShortDescription(),
          'description' => $furniture->getDescription(),
          'image' => $furniture->getImage(),
-         'categories' => $furniture->getCategories()
+         'categories' => $furniture->getCategories(),
+         'filamento' => $furniture->getfilamento(),
+         'color' => $furniture->getcolor(),
+         'material' => $furniture->getmaterial(),
+         'tamaño' => $furniture->gettamaño()
       ];
 
       return $this->json($furniture_json);
@@ -108,6 +120,10 @@ class FurnitureController extends AbstractController {
       $furniture->setDescription($furniture_stdClass->description);
       $furniture->setImage($furniture_stdClass->image);
       $furniture->setCategories($furniture_stdClass->categories);
+      $furniture->setfilamento($furniture_stdClass->filamento);
+      $furniture->setcolor($furniture_stdClass->color);
+      $furniture->setmaterial($furniture_stdClass->material);
+      $furniture->settamaño($furniture_stdClass->tamaño);
 
       $em->persist($furniture);
       $em->flush();
@@ -120,7 +136,12 @@ class FurnitureController extends AbstractController {
          'shortDescription' => $furniture->getShortDescription(),
          'description' => $furniture->getDescription(),
          'image' => $furniture->getImage(),
-         'categories' => $furniture->getCategories()
+         'categories' => $furniture->getCategories(),
+         'filamento' => $furniture->getfilamento(),
+         'color' => $furniture->getcolor(),
+         'material' => $furniture->getmaterial(),
+         'tamaño' => $furniture->gettamaño()
+
       ];
       return $this->json($furniture_json);
    }

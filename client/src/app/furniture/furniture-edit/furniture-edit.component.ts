@@ -26,7 +26,11 @@ export class FurnitureEditComponent implements OnInit {
     description: '',
     categories: [''],
     image: '',
-};
+    filamento: '',
+    color: '',
+    material: '',
+    tamaño: 0
+  };
 constructor(
   private fb: FormBuilder,
   private activatedroute: ActivatedRoute,
@@ -50,6 +54,11 @@ ngOnInit(): void {
     description: '',
     shortDescription: '',
     image: '',
+    filamento: '',
+    color: '',
+    material: '',
+    tamaño: 0
+   
   });
 
   this.furnitureId = parseInt(this.activatedroute.snapshot.params['id']);
@@ -79,6 +88,11 @@ displayFurniture(furniture: Furniture): void {
     shortDescription: this.furniture.shortDescription,
     categories: this.furniture.categories.join(','),
     image: this.furniture.image,
+    filamento: this.furniture.filamento,
+    color: this.furniture.color,
+    material: this.furniture.material,
+    tamaño: this.furniture.tamaño
+
   });
 }
 
@@ -107,6 +121,9 @@ saveFurniture(): void {
        this.furniture.description = tmp.description;
        this.furniture.categories = tmp.categories.split(',');
        this.furniture.image = tmp.image;
+       this.furniture.color = tmp.color;
+       this.furniture.material = tmp.material;
+       this.furniture.tamaño = tmp.tamaño;
 
       this.furnitureservice.updateFurniture(this.furniture).subscribe(
         () => this.onSaveComplete(),

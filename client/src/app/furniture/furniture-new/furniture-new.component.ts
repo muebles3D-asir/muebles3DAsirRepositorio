@@ -25,6 +25,10 @@ export class FurnitureNewComponent implements OnInit {
     description: '',
     categories: [''],
     image: '',
+    filamento: '',
+    color: '',
+    material: '',
+    tamaño: 0    
   };
 
   constructor(
@@ -50,6 +54,10 @@ export class FurnitureNewComponent implements OnInit {
       description: '',
       shortDescription: '',
       image: '',
+      filamento: '',
+      color: '',
+      material: '',
+      tamaño: 0    
     });
 
     // Read the furniture Id from the route parameter
@@ -67,6 +75,10 @@ export class FurnitureNewComponent implements OnInit {
        this.furniture.description = tmp.description;
        this.furniture.categories = tmp.categories.split(',');
        this.furniture.image = tmp.image;
+       this.furniture.color = tmp.color;
+       this.furniture.material = tmp.material;
+       this.furniture.tamaño = tmp.tamaño;
+
 
         console.log(this.furniture);
         this.furniture.id = this.furnitureId;

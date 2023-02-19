@@ -7,4 +7,8 @@ export interface Furniture {
   description: string;
   categories: string[];
   image: string;
+  filamento: string;
+  color: string;
+  material: string;
+  tamaño: number;  
 }
