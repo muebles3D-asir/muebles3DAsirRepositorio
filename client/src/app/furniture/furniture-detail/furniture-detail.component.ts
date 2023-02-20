@@ -25,7 +25,7 @@ export class FurnitureDetailComponent implements OnInit {
   };
   furnitureId: number = 0;
   categoriesList: string = "";
-  
+
 
   constructor(
     private activatedroute: ActivatedRoute,

@@ -17,7 +17,7 @@ export class FurnitureService {
   getFurnitures(): Observable<Furniture[]> {
 
     return this.http.get<Furniture[]>(this.url).pipe(
-      tap((data) => console.log(JSON.stringify(data))),
+      tap((data: any) => console.log(JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
@@ -25,10 +25,10 @@ export class FurnitureService {
   getMaxFurnitureId(): Observable<number> {
     return this.http.get<Furniture[]>(`${this.url}`).pipe(
       // Get max value from an array
-      map((data) =>
+      map((data: any) =>
         Math.max.apply(
           Math,
-          data.map(function (o) {
+          data.map(function (o: any) {
             return o.id;
           })
         )
@@ -40,7 +40,7 @@ export class FurnitureService {
   getFurnitureById(id: number): Observable<Furniture> {
     const url = `${this.url}/${id}`;
     return this.http.get<Furniture>(url).pipe(
-      tap((data) => console.log('getFurnitureById: ' + JSON.stringify(data))),
+      tap((data: any) => console.log('getFurnitureById: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
@@ -51,7 +51,7 @@ export class FurnitureService {
     return this.http
       .post<Furniture>(this.url, furniture, { headers: headers })
       .pipe(
-        tap((data) => console.log('createFurniture: ' + JSON.stringify(data))),
+        tap((data: any) => console.log('createFurniture: ' + JSON.stringify(data))),
         catchError(this.handleError)
       );
   }
@@ -60,7 +60,7 @@ export class FurnitureService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const url = `${this.url}/${id}`;
     return this.http.delete<Furniture>(url, { headers: headers }).pipe(
-      tap((data) => console.log('deleteFurniture: ' + id)),
+      tap((data: any) => console.log('deleteFurniture: ' + id)),
       catchError(this.handleError)
     );
   }

@@ -9,9 +9,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements PasswordAuthenticatedUserInterface
-{
-  
+class User implements PasswordAuthenticatedUserInterface {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -20,50 +19,39 @@ class User implements PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 25)]
     private $username;
 
-    
-    #[ORM\Column(length:500)]     
+    #[ORM\Column(length: 500)]
     private  $password;
 
-    
-    #[ORM\Column(name:"is_active", type:"boolean")]     
+    #[ORM\Column(name: "is_active", type: "boolean")]
     private $isActive;
 
-    public function __construct($username)
-    {
+    public function __construct($username) {
         $this->isActive = true;
         $this->username = $username;
     }
 
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
-    public function getSalt()
-    {
+    public function getSalt() {
         return null;
     }
-    public function getPassword(): ?string{
-       
+    public function getPassword(): ?string {
+
         return $this->password;
-
     }
-    
 
-    public function setPassword($password)
-    {
+
+    public function setPassword($password) {
         $this->password = $password;
     }
-   
 
-    public function getRoles()
-    {
+
+    public function getRoles() {
         return array('ROLE_USER');
     }
 
-    public function eraseCredentials()
-    {
+    public function eraseCredentials() {
     }
-    
 }
-

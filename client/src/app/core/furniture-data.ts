@@ -10,8 +10,8 @@ export class FurnitureData implements InMemoryDbService {
         rating: 4.3,
         shortDescription: 'This is a short description of the First Furniture',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        categories: ['electronics', 'hardware'],
         image: 'https://picsum.photos/820/300',
+        categories: ['electronics', 'hardware'],
       },
       {
         id: 1,
@@ -20,8 +20,8 @@ export class FurnitureData implements InMemoryDbService {
         rating: 3.5,
         shortDescription: 'This is a short description of the Second Furniture',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        categories: ['books'],
         image: 'https://picsum.photos/820/300',
+        categories: ['books'],
       },
       {
         id: 2,
@@ -30,8 +30,8 @@ export class FurnitureData implements InMemoryDbService {
         rating: 4.2,
         shortDescription: 'This is a short description of the Third Furniture',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        categories: ['electronics'],
         image: 'https://picsum.photos/820/300',
+        categories: ['electronics'],
       },
       {
         id: 3,
@@ -40,8 +40,8 @@ export class FurnitureData implements InMemoryDbService {
         rating: 3.9,
         shortDescription: 'This is a short description of the Fourth Furniture',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        categories: ['hardware'],
         image: 'https://picsum.photos/820/300',
+        categories: ['hardware'],
       },
       {
         id: 4,
@@ -50,8 +50,8 @@ export class FurnitureData implements InMemoryDbService {
         rating: 5,
         shortDescription: 'This is a short description of the Fifth Furniture',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        categories: ['electronics', 'hardware'],
         image: 'https://picsum.photos/820/300',
+        categories: ['electronics', 'hardware'],
       },
       {
         id: 5,
@@ -60,8 +60,8 @@ export class FurnitureData implements InMemoryDbService {
         rating: 4.6,
         shortDescription: 'This is a short description of the Sixth Furniture',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        categories: ['books'],
         image: 'https://picsum.photos/820/300',
+        categories: ['books'],
       },
     ];
     return { furnitures: furnitures };
