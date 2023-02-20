@@ -1,6 +1,6 @@
 
 import { Component, OnInit, AfterViewInit, OnDestroy, ViewChildren, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormControlName } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Furniture } from '../../shared/furniture.model';
@@ -58,7 +58,7 @@ ngOnInit(): void {
     color: '',
     material: '',
     tamaño: 0
-   
+
   });
 
   this.furnitureId = parseInt(this.activatedroute.snapshot.params['id']);
@@ -109,7 +109,7 @@ deleteFurniture(): void {
     }
   }
   }
-  
+
 saveFurniture(): void {
   if (this.furnitureForm.valid) {
     if (this.furnitureForm.dirty) {

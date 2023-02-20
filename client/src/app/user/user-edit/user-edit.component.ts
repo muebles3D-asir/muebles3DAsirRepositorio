@@ -1,7 +1,6 @@
 
 import { Component, OnInit, AfterViewInit, OnDestroy, ViewChildren, ElementRef } from '@angular/core';
-
-import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormControlName } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { User } from '../../shared/user.model';
@@ -30,7 +29,7 @@ export class UserEditComponent implements OnInit {
     private fb: FormBuilder,
     private activatedroute: ActivatedRoute,
     private router: Router,
-    private userservice: UserService
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +53,7 @@ export class UserEditComponent implements OnInit {
   }
 
   getUser(id: number): void {
-    this.userservice.getUserById(id).subscribe(
+    this.userService.getUserById(id).subscribe(
       (user: User) => this.displayUser(user),
       (error: any) => (this.errorMessage = <any>error)
     );
@@ -82,7 +81,7 @@ export class UserEditComponent implements OnInit {
       this.onSaveComplete();
     } else {
       if (confirm(`Really delete the User: ${this.user.name}?`)) {
-        this.userservice.deleteUser(this.user.id).subscribe(
+        this.userService.deleteUser(this.user.id).subscribe(
           () => this.onSaveComplete(),
           (error: any) => (this.errorMessage = <any>error)
         );
@@ -96,7 +95,7 @@ export class UserEditComponent implements OnInit {
         this.user = this.userForm.value;
         this.user.id = this.userId;
 
-        this.userservice.updateUser(this.user).subscribe(
+        this.userService.updateUser(this.user).subscribe(
           () => this.onSaveComplete(),
           (error: any) => (this.errorMessage = <any>error)
         );

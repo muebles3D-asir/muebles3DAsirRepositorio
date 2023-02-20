@@ -19,7 +19,7 @@ class UserController extends AbstractController {
     $data = $request->getContent();
     $user_stdClass = json_decode($data);
 
-    $user = new User();
+    $user = new User("");
     $user->setName($user_stdClass->name);
     $user->setPassword($user_stdClass->password);
     $user->setMail($user_stdClass->email);

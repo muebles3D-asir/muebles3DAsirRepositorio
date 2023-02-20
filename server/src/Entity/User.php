@@ -3,55 +3,82 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-
-
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements PasswordAuthenticatedUserInterface {
+#[ORM\InheritanceType('SINGLE_TABLE')]
+#[ORM\DiscriminatorColumn(name: 'roles', type: 'simple_array')]
 
+class User implements UserInterface, PasswordAuthenticatedUserInterface {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private $id;
+    private ?int $id = null;
 
-    #[ORM\Column(length: 25)]
-    private $username;
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
 
-    #[ORM\Column(length: 500)]
-    private  $password;
+    #[ORM\Column(length: 255)]
+    private ?string $password = null;
 
-    #[ORM\Column(name: "is_active", type: "boolean")]
-    private $isActive;
+    #[ORM\Column]
+    private ?bool $isActive = null;
 
-    public function __construct($username) {
-        $this->isActive = true;
-        $this->username = $username;
+    // #[ORM\Column(type: Types::SIMPLE_ARRAY)]
+    private array $roles = ['ROLE_USER'];
+
+    public function getId(): ?int {
+        return $this->id;
     }
 
-    public function getUsername() {
+    public function getUsername(): ?string {
         return $this->username;
     }
 
-    public function getSalt() {
-        return null;
-    }
-    public function getPassword(): ?string {
+    public function setUsername(string $username): self {
+        $this->username = $username;
 
+        return $this;
+    }
+
+    public function getPassword(): ?string {
         return $this->password;
     }
 
-
-    public function setPassword($password) {
+    public function setPassword(string $password): self {
         $this->password = $password;
+
+        return $this;
     }
 
+    public function isIsActive(): ?bool {
+        return $this->isActive;
+    }
 
-    public function getRoles() {
-        return array('ROLE_USER');
+    public function setIsActive(bool $isActive): self {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getRoles(): array {
+        return $this->roles;
     }
 
     public function eraseCredentials() {
+        $this->password = null;
+    }
+
+    public function getUserIdentifier(): string {
+        return $this->getUsername();
+    }
+
+    public function setRoles(array $roles): self {
+        $this->roles = $roles;
+
+        return $this;
     }
 }
