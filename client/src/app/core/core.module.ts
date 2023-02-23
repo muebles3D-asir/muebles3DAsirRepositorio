@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 // import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FurnitureData } from './furniture-data';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [],
@@ -13,6 +15,6 @@ import { FurnitureData } from './furniture-data';
     HttpClientModule,
     // InMemoryWebApiModule.forRoot(FurnitureData),
   ],
-  providers: [FurnitureService],
+  providers: [FurnitureService, AuthService, AuthGuard],
 })
-export class CoreModule { }
+export class CoreModule {}

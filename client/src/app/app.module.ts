@@ -8,10 +8,14 @@ import { FurnitureModule } from './furniture/furniture.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from "@angular/common/http";
 import { LogComponent } from './log/log.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    RegisterComponent,
+    LoginComponent,
    // LogComponent // TODO: Ver porque no va
   ],
   imports: [
