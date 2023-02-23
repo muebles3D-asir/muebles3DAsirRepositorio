@@ -10,7 +10,7 @@ import { User } from '../shared/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  private url = 'http://127.0.0.1:8000/user';
+  private url = 'https://127.0.0.1:8000/user';
 
   constructor(private http: HttpClient) {}
 
